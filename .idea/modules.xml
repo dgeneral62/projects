@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../projects/.idea/Gaming1GF.iml" filepath="$PROJECT_DIR$/../projects/.idea/Gaming1GF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../newaddressbook_gf/.idea/newaddressbook_gf.iml" filepath="$PROJECT_DIR$/../newaddressbook_gf/.idea/newaddressbook_gf.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/projects-github.iml" filepath="$PROJECT_DIR$/.idea/projects-github.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../to-do-list-gf/.idea/to-do-list-gf.iml" filepath="$PROJECT_DIR$/../to-do-list-gf/.idea/to-do-list-gf.iml" />
     </modules>
   </component>
 </project>

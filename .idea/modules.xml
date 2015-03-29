@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
+=======
+      <module fileurl="file://$PROJECT_DIR$/../newaddressbook_gf/.idea/newaddressbook_gf.iml" filepath="$PROJECT_DIR$/../newaddressbook_gf/.idea/newaddressbook_gf.iml" />
+>>>>>>> fe2dbd2ba34a2993e29fa14281eccb8078e45e05
       <module fileurl="file://$PROJECT_DIR$/.idea/projects-github.iml" filepath="$PROJECT_DIR$/.idea/projects-github.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../to-do-list-gf/.idea/to-do-list-gf.iml" filepath="$PROJECT_DIR$/../to-do-list-gf/.idea/to-do-list-gf.iml" />
     </modules>
   </component>
 </project>

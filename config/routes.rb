@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   root 'gamers#home'
+  #root 'users/sign_in'
   # root 'gamers#new' , root 'gamers#show', root 'gamers#create'
 
   # Example of regular route:

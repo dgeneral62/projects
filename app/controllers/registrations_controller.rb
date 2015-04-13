@@ -6,6 +6,14 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     super
+    googleId = params[:googleId]
+    if (googleId != nil && googleId != "")
+      users = User.where(google : googleId)
+      if users.count == 0
+        @user.google = googleId
+        @user.save
+      end
+    end
     Newuser.sendmail(@user).deliver_now unless @user.invalid?
   end
 
@@ -14,7 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password, :googleId)
   end
   
 end 

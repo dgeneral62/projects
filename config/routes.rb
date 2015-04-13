@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => {:registrations => "registrations"}
   #devise_for :controllers #controllers: {sessions: 'sessions'}
   resources :gamers
-
+  #resources :misc, defaults: {format: :json}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   root 'gamers#home'
+  get 'misc/createGoogle'
+  
   #root 'users/sign_in'
   # root 'gamers#new' , root 'gamers#show', root 'gamers#create'
 

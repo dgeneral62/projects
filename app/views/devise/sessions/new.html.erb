@@ -1,6 +1,56 @@
+
+  <script type="text/javascript">
+      function signinCallback(authResult) {
+        if (authResult['status']['signed_in']) {
+          gapi.client.load('plus', 'v1', apiClientLoaded);
+          document.getElementById('signinButton').setAttribute('style', 'display: none');
+        } else {
+          console.log('Sign-in state: ' + authResult['error']);
+        }
+      }
+      
+      function apiClientLoaded() {
+        gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
+      }
+
+      function handleEmailResponse(resp) {
+          var googleId = resp.id;
+          var hasAccount = false;
+          if (googleId != null && googleId.length > 0){
+            var promise = $.ajax({
+              type: "get",
+              url: "/misc/createGoogle",
+              data: {'gid' : googleId},
+              //data: {'gid' : "1"},
+              dataType: 'json',
+              success: function(data){
+                console.log(data);
+                if (data.length == 0) return;
+                hasAccount = true;
+                $("#user_email").val(data[0].email == null ? "" : data[0].email);
+                $("#user_password").val(googleId);
+              }});
+             
+             $.when(promise)
+              .done(function() {
+                if (hasAccount)
+                 document.forms[0].submit();
+              });
+             /*if (document.getElementById('googleTried').value.toLowerCase() == "false"){
+               document.getElementById('googleTried').value = "true";
+               document.forms[0].action = document.forms[0].action + "?gid=" + googleId;
+               document.forms[0].submit();
+               
+             }*/
+          }
+      }
+  </script>
+
+
 <h2>Log in</h2>
 <div class = form-center">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <input type='hidden' name='googleTried' id='googleTried' value='false' />
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>

@@ -1,4 +1,3 @@
-
   <script type="text/javascript">
       function signinCallback(authResult) {
         if (authResult['status']['signed_in']) {
@@ -36,12 +35,6 @@
                 if (hasAccount)
                  document.forms[0].submit();
               });
-             /*if (document.getElementById('googleTried').value.toLowerCase() == "false"){
-               document.getElementById('googleTried').value = "true";
-               document.forms[0].action = document.forms[0].action + "?gid=" + googleId;
-               document.forms[0].submit();
-               
-             }*/
           }
       }
   </script>
@@ -49,6 +42,9 @@
 
 <h2>Log in</h2>
 <div class = form-center">
+<div class = "form-center col-md-10 col-md-offset-10">
+  <h2>Log in</h2>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <input type='hidden' name='googleTried' id='googleTried' value='false' />
   <div class="field">

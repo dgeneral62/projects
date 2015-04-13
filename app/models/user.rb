@@ -3,16 +3,34 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :custom_authenticatable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-    
+  devise :omniauthable, :omniauth_providers => [:facebook]
+  
   def valid_for_custom_authentication?(password)
     logger.debug('------------authenticate!---------------')
     gid = self.google
-    uname = self.email
-    record = User.where()
     if gid != nil && gid != ''
       return true
     else 
       skip_custom_strategies
     end
   end
+  
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.email = auth.info.email
+      user.name = auth.info.name
+      user.password = Devise.friendly_token[0,20]
+      user.image = auth.info.image
+      user.save!
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
 end

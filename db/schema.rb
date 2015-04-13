@@ -12,6 +12,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20150406125839) do
+ActiveRecord::Schema.define(version: 20150406020439) do
 
   create_table "gamers", force: :cascade do |t|
     t.string   "firstname"
@@ -42,6 +43,12 @@ ActiveRecord::Schema.define(version: 20150406125839) do
     t.boolean  "Confirmation"
     t.string   "google"
     t.string   "string"
+    t.text     "status"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "image"
+    t.string   "name"
+>>>>>>> ae5d7ba927de4c56d01b3514325d2bbef81b8fb1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

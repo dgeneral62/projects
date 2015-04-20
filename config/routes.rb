@@ -2,12 +2,6 @@ Rails.application.routes.draw do
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
-
-  devise_for :views
-  devise_for :users, :controllers => {:registrations => "registrations"}
-  #devise_for :controllers #controllers: {sessions: 'sessions'}
-  resources :gamers
-  #resources :misc, defaults: {format: :json}
   devise_for :users, path_names: {sign_out: "logout"}, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #devise_for :controllers #controllers: {sessions: 'sessions'}
   resources :gamers
@@ -73,3 +67,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 end
+
+

@@ -1,0 +1,9 @@
+<% if user_signed_in? %>
+    <p>Welcome <%= current_user.email %></p>
+    <p> <%= link_to 'Game List', games_path %> </p>
+    <p> <%= link_to 'Friends', friends_path %> </p>
+    <p> <%= link_to 'Settings', edit_user_registration_path %> </p>
+    <p> <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+<% else %>
+    <%= link_to 'Login', new_user_session_path %>
+<% end %> </p>

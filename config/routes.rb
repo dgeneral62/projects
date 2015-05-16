@@ -1,8 +1,21 @@
 Rails.application.routes.draw do
+  get 'update_location/current'
+
+  get 'update_location/new'
+
+  resources :user_friends
+
+  resources :user_games
+
+  resources :friends
+
+  resources :games
+
   devise_for :views
   devise_for :users
   #devise_for :controllers #controllers: {sessions: 'sessions'}
   resources :gamers
+  resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

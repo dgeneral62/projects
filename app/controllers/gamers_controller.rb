@@ -21,6 +21,9 @@
   def edit
   end
 
+  def home
+  end
+
   # POST /gamers
   # POST /gamers.json
   def create

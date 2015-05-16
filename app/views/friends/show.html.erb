@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gamer ID:</strong>
+  <%= @friend.gamer_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @friend.name %>
+</p>
+
+<p>
+  <strong>Player Rank:</strong>
+  <%= @friend.player_rank %>
+</p>
+
+<p>
+  <strong>Platform:</strong>
+  <%= @friend.platform %>
+</p>
+
+<%= link_to 'Edit', edit_friend_path(@friend) %> |
+<%= link_to 'Back', friends_path %>

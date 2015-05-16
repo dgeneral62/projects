@@ -1,0 +1,2 @@
+module UpdateLocationHelper
+end

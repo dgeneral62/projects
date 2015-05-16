@@ -1,6 +1,13 @@
 source 'https://rubygems.org'
 
 gem 'devise'
+gem 'searchkick'
+
+gem 'tire'
+
+gem 'gmaps4rails'
+
+#gem "searchkick"
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS

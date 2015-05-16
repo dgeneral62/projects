@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing User Games</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Rating</th>
+      <th>Release date</th>
+      <th>Publisher</th>
+      <th>Platform</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @user_games.each do |user_game| %>
+      <tr>
+        <td><%= user_game.name %></td>
+        <td><%= user_game.rating %></td>
+        <td><%= user_game.release_date %></td>
+        <td><%= user_game.publisher %></td>
+        <td><%= user_game.platform %></td>
+        <td><%= link_to 'Show', user_game %></td>
+
+        <td><%= link_to 'Destroy', user_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to t('.cancel', :default => t("helpers.links.Add_Games")),
+            games_path,
+            :class => 'btn btn-primary' %>
+<%= link_to t('.cancel', :default => t("helpers.links.home")),
+            user_games_path, :class => 'btn btn-default' %>

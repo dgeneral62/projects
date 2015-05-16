@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329203204) do
+ActiveRecord::Schema.define(version: 20150406161230) do
+
+  create_table "friends", force: :cascade do |t|
+    t.string   "gamer_id"
+    t.string   "name"
+    t.string   "player_rank"
+    t.string   "platform"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "gamers", force: :cascade do |t|
     t.string   "firstname"
@@ -20,6 +29,35 @@ ActiveRecord::Schema.define(version: 20150329203204) do
     t.string   "email"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "games", force: :cascade do |t|
+    t.string   "name"
+    t.string   "rating"
+    t.string   "release_date"
+    t.string   "publisher"
+    t.string   "platform"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "user_friends", force: :cascade do |t|
+    t.string   "gamer_id"
+    t.string   "name"
+    t.string   "player_rank"
+    t.string   "platform"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "user_games", force: :cascade do |t|
+    t.string   "name"
+    t.string   "rating"
+    t.string   "release_date"
+    t.string   "publisher"
+    t.string   "platform"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|

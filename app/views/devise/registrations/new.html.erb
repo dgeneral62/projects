@@ -8,7 +8,7 @@
           console.log('Sign-in state: ' + authResult['error']);
         }
       }
-
+      
       function apiClientLoaded() {
         gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
       }
@@ -17,11 +17,11 @@
           var googleId = resp.id;
           var hasAccount = false;
           $("#googleId").val(googleId);
-
+          
       }
   </script>
-
-
+  
+  
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 <div class = "container col-md-10 col-md-offset-10">
@@ -77,7 +77,7 @@
     </div>
     <span id="google_alert" style="display:none">Your account will now be linked to google on creation.</span>
   </div>
-
+  
   <input type="hidden" name="googleId" id="googleId" />
 <% end %>
 

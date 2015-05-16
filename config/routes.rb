@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'update_location/current'
 
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
@@ -16,9 +15,8 @@ Rails.application.routes.draw do
 
   root 'gamers#home'
   get 'misc/createGoogle'
-
+  
   #root 'users/sign_in'
-
   # root 'gamers#new' , root 'gamers#show', root 'gamers#create'
 
   # Example of regular route:
@@ -70,5 +68,3 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 end
-
-

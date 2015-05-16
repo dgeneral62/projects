@@ -1,4 +1,13 @@
-<h2>Sign up</h2>
+  <script type="text/javascript">
+      function signinCallback(authResult) {
+        if (authResult['status']['signed_in']) {
+          gapi.client.load('plus', 'v1', apiClientLoaded);
+          document.getElementById('signinButton').setAttribute('style', 'display: none');
+          document.getElementById("google_alert").setAttribute('style', 'display: inline');
+        } else {
+          console.log('Sign-in state: ' + authResult['error']);
+        }
+      }
 
       function apiClientLoaded() {
         gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
@@ -15,62 +24,62 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
-<div; class = "container col-md-10 col-md-offset-10">
-  <h2>Sign; up</h2>
-    <div; class="field">
+<div class = "container col-md-10 col-md-offset-10">
+  <h2>Sign up</h2>
+    <div class="field">
       <%= f.label :first_name %><br />
       <%= f.text_field :first_name, autofocus: true %>
     </div>
 
-  <div; class="field">
+    <div class="field">
       <%= f.label :last_name %><br />
       <%= f.text_field :last_name, autofocus: true %>
     </div>
 
-    <div; class="field">
+    <div class="field">
       <%= f.label :phone_number %><br />
       <%= f.text_field :phone_number, autofocus: false %>
     </div>
 
-    <div; class="field">
+    <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
 
-  <div; class="field">
+  <div class="field">
     <%= f.label :password %>
     <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters; minimum)</em>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
-  <div; class="field">
+  <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div; class="actions">
+  <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
 
-  <div; class="actions">
+  <div class="actions">
     <%= f.submit "Sign up" %>
-    <div; id="signinButton"><br>
-      <span;
-        class="g-signin";
-        data-callback="signinCallback";
-        data-clientid="893730814987-2ljgnra992k43mpv5hugp049balt974c.apps.googleusercontent.com";
-        data-cookiepolicy="single_host_origin";
-        data-requestvisibleactions="http://schema.org/AddAction";
+    <div id="signinButton"><br>
+      <span
+        class="g-signin"
+        data-callback="signinCallback"
+        data-clientid="893730814987-2ljgnra992k43mpv5hugp049balt974c.apps.googleusercontent.com"
+        data-cookiepolicy="single_host_origin"
+        data-requestvisibleactions="http://schema.org/AddAction"
         data-scope="https://www.googleapis.com/auth/plus.login">
       </span>
     </div>
-    <span; id="google_alert"; style="display:none">Your; account; will; now; be; linked; to; google; on; creation.</span>
+    <span id="google_alert" style="display:none">Your account will now be linked to google on creation.</span>
   </div>
 
-  <input; type="hidden"; name="googleId"; id="googleId" />
+  <input type="hidden" name="googleId" id="googleId" />
 <% end %>
 
 <%= render "devise/shared/links" %>
-</div>;
+</div>

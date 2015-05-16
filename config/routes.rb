@@ -1,18 +1,9 @@
 Rails.application.routes.draw do
   get 'update_location/current'
 
-  get 'update_location/new'
-
-  resources :user_friends
-
-  resources :user_games
-
-  resources :friends
-
-  resources :games
-
-  devise_for :views
-  devise_for :users
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'logout', to: 'sessions#destroy'
+  devise_for :users, path_names: {sign_out: "logout"}, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #devise_for :controllers #controllers: {sessions: 'sessions'}
   resources :gamers
   resources :users
@@ -24,7 +15,10 @@ Rails.application.routes.draw do
   # root 'welcome#index'
 
   root 'gamers#home'
+  get 'misc/createGoogle'
+
   #root 'users/sign_in'
+
   # root 'gamers#new' , root 'gamers#show', root 'gamers#create'
 
   # Example of regular route:
@@ -76,3 +70,5 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 end
+
+

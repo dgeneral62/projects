@@ -15,10 +15,19 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.default_url_options = { :host => 'localhost'}
 
-  # Print deprecation notices to the Rails logger.
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => "sandbox34eadd7846e74585b0af456daca7b186.mailgun.org",
+    :user_name => "postmaster@sandbox34eadd7846e74585b0af456daca7b186.mailgun.org",
+    :password => "62a85258ab13483b39b34b4f0dcdc3ac"
+  }
+    # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
   # Raise an error on page load if there are pending migrations.

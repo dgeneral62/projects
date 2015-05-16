@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515210354) do
+ActiveRecord::Schema.define(version: 20150516211800) do
 
   create_table "friends", force: :cascade do |t|
     t.string   "gamer_id"
@@ -92,7 +92,11 @@ ActiveRecord::Schema.define(version: 20150515210354) do
     t.string   "provider"
     t.string   "uid"
     t.string   "name"
-    t.string   "image_url"
+    t.string   "image"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

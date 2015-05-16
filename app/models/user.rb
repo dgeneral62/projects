@@ -1,10 +1,15 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :custom_authenticatable, :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  devise :omniauthable, :omniauth_providers => [:facebook]
-  
+
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
+
+
+  has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100#" }, :default_url => "images/missing.png"
+  validates_attachment_content_type :photo, :content_type => ['image/jpeg','image/png',/\Aimage\/.*\Z/]
+
+
   def valid_for_custom_authentication?(password)
     logger.debug('------------authenticate!---------------')
     gid = self.google
@@ -20,7 +25,7 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.name = auth.info.name
       user.password = Devise.friendly_token[0,20]
-      #user.image = auth.info.image
+      user.image = auth.info.image
       user.save!
     end
   end

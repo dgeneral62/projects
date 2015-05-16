@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'gamers#home'
+
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
   devise_for :users, path_names: {sign_out: "logout"}, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
@@ -7,13 +9,26 @@ Rails.application.routes.draw do
   resources :gamers
   resources :users
 
+  get 'update_location/current'
+
+  get 'update_location/new'
+
+  resources :user_friends
+
+  resources :user_games
+
+  resources :friends
+
+  resources :games
+
+  devise_for :views
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root 'gamers#home'
   get 'misc/createGoogle'
   
   #root 'users/sign_in'

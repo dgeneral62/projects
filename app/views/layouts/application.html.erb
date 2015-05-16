@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "projects" %></title>
+    <title><%= content_for?(:title) ? yield(:title) : "G.O.D Gamers" %></title>
     <%= csrf_meta_tags %>
 
     <title>GameNation</title>
@@ -41,22 +41,110 @@
     <%= javascript_include_tag "application" %>
   </head>
   <body>
-    <div class="navbar navbar-default navbar-static-top navbar-inverse">
+    <div class="navbar-wrapper">
       <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">G.O.D GameNation</a>
-        <div class="navbar-collapse collapse navbar-responsive-collapse">
-          <ul class="nav navbar-nav">
-            <li><%= link_to "Home", "/path1"  %></li>
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">G.O.D GameNation</a>
+              </div>
+              <div id="navbar" class="navbar-collapse collapse">
+              <% if user_signed_in? %>
+              <ul class="nav navbar-nav theList", class = "liz">
+                <li> Search Bar Goes Here</li>
+                <li><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                  &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+                  &ensp;&ensp;&ensp;&ensp;&ensp;</p></li>
+                <li class="active"><%= link_to "Home", root_url  %></li>
+                <li><%= link_to 'Settings', edit_user_registration_path %> </li>
+                <li><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></li>
+              </ul>
+          <% else %>
+          <ul class="nav navbar-nav theList", class = "liz">
+            <li><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+              &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+              &ensp;&ensp;&ensp;&ensp;&ensp;</p></li>
+            <li class = "active"><%= link_to "Home", root_url  %></li>
+            <li><%= link_to "Login", new_user_session_path  %></li>
+            <li><%= link_to "Login With Facebook", user_omniauth_authorize_path(:facebook)  %></li>
           </ul>
-        </div>
+              <% end%>
+              </div>
+          </div>
+        </nav>
       </div>
     </div>
 
+    <% if !user_signed_in? && current_page?(root_url) %>
+    <!-- Carousel
+   ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>WELCOME G.O.D GAMERS.</h1>
+              <p>Never register for another gaming site again
+                Sign up to get instant access to a social network like no other!</p>
+              <p><a class="btn btn-lg btn-primary" href="http://localhost:3000/users/sign_up" role="button">Sign up today</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Join the Ultimate Gaming Social Network.</h1>
+              <p>For people who enjoy video games, it can be a chore to find folks with similar game interests as you without a chance encounter on PSN or X-Box Live.Our system seeks to rectify this issue by letting the user decide who they want to link up with online based on similar interests and conversation. Our system will work exactly like a specialized social network, similar to LinkedIn, but geared towards gaming.</p>
+              <p><a class="btn btn-lg btn-primary" href="https://docs.google.com/document/d/1hzSoU6OH6lURQiAXuM0o21VKK7oZPjzh8hwXm694RbA/edit" role="button">User Stories</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
+  <h3>Most Wanted Games</h3>
+      <ul>
+        <li>Game 1</li>
+        <li>Game 2</li>
+        <li>Game 3</li>
+        <li>Game 4</li>
+        <li>Game 5</li>
+        <li>Game 6</li>
+      </ul>
+  <% end%>
+
+    <!-- Other Part
+   ================================================== -->
     <div class="container">
       <div class="row">
         <div class="col-lg-9">
@@ -69,9 +157,9 @@
         </div>
       </div><!--/row-->
 
-      <div class="navbar navbar-fixed-bottom">
+      <div class="fixed-bottom">
       <div id="footer">
-        <pre>&ensp;&ensp;&ensp; &copy;   G.O.D     &ensp;       About Us   &ensp;     Help    &ensp;     Contact Us        &ensp;  Game Nation 2013</pre>
+        <pre>&ensp;&ensp;&ensp; &copy;   2015 G.O.D GameNation Company, Inc.     &ensp;       <a href="#">About Us</a>   &ensp;     <a href="#">Privacy</a>    &ensp;     <a href="#">Contact Us</a>        &ensp;  <a href="#">Terms</a></pre>
         </div>
     </div>
 

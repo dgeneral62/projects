@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
       user.email = auth.info.email
       user.name = auth.info.name
       user.password = Devise.friendly_token[0,20]
-      user.image = auth.info.image
+      #user.image = auth.info.image
       user.save!
     end
   end

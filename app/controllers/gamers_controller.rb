@@ -80,7 +80,9 @@
   end
 
   def home
-    @status = UserStatus.where(email: current_user.email).order("PostDate DESC").first
+    if (current_user != nil && current_user.email != nil)
+      @status = UserStatus.where(email: current_user.email).order("PostDate DESC").first
+    end
   end
   
 

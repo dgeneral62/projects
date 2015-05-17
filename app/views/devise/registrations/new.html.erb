@@ -30,9 +30,10 @@
 
   
   
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name) , :html => { :multipart => true }) do |f| %>
   <%= devise_error_messages! %>
 <div class = "container col-md-10 col-md-offset-10">
+  </br>
   <h2>Sign up</h2>
     <div class="field">
       <%= f.label :first_name %><br />
@@ -67,9 +68,10 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="field">
+    <%= f.file_field :photo %><br />
   </div>
+
 
   <div class="actions">
     <%= f.submit "Sign up" %>
@@ -89,5 +91,4 @@
   <input type="hidden" name="googleId" id="googleId" />
 <% end %>
 
-<%= render "devise/shared/links" %>
 </div>

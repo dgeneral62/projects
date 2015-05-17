@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     super
     googleId = params[:googleId]
     if (googleId != nil && googleId != "")
-      users = User.where(google : googleId)
+      users = User.where(google :googleId)
       if users.count == 0
         @user.google = googleId
         @user.save

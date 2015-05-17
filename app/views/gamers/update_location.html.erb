@@ -1,0 +1,8 @@
+<% if user_signed_in? %>
+    <p>Welcome <%= current_user.email %></p>
+
+<%= link_to "Back", :back %>
+
+<% else %>
+    <%= link_to 'Login', new_user_session_path %>
+<% end %> </p>

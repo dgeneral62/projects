@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517030706) do
+ActiveRecord::Schema.define(version: 20150516211800) do
+
+  create_table "friends", force: :cascade do |t|
+    t.string   "gamer_id"
+    t.string   "name"
+    t.string   "player_rank"
+    t.string   "platform"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "gamers", force: :cascade do |t|
     t.string   "firstname"
@@ -28,15 +37,53 @@ ActiveRecord::Schema.define(version: 20150517030706) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "PostDate"
+
+  create_table "games", force: :cascade do |t|
+    t.string   "name"
+    t.string   "rating"
+    t.string   "release_date"
+    t.string   "publisher"
+    t.string   "platform"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "microposts", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
+  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
+
+  create_table "user_friends", force: :cascade do |t|
+    t.string   "gamer_id"
+    t.string   "name"
+    t.string   "player_rank"
+    t.string   "platform"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "user_games", force: :cascade do |t|
+    t.string   "name"
+    t.string   "rating"
+    t.string   "release_date"
+    t.string   "publisher"
+    t.string   "platform"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  default: "",    null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -46,11 +93,18 @@ ActiveRecord::Schema.define(version: 20150517030706) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "phone_number"
-    t.boolean  "confirm",                default: false, null: false
     t.boolean  "Confirmation"
     t.string   "google"
     t.string   "string"
     t.string   "bio"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "image"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

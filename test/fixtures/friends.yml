@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gamer_id: MyString
+  name: MyString
+  player_rank: MyString
+  platform: MyString
+
+two:
+  gamer_id: MyString
+  name: MyString
+  player_rank: MyString
+  platform: MyString

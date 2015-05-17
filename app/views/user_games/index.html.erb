@@ -1,8 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing User Games</h1>
+<div id="search" class="light">
+<%= form_tag user_games_path, :method => :get do %>
+    <%= auto_complete_field_tag_jquery(:search, params[:search], {:placeholder => "Enter Search Here"}) %>
+    <button id='submit_search' style="font-size: 12px;">Search</button>
+    <% end %>
+</div>
 
-<table>
+<p><br /></p>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -23,7 +30,7 @@
         <td><%= user_game.publisher %></td>
         <td><%= user_game.platform %></td>
         <td><%= link_to 'Show', user_game %></td>
-
+        <td><%= link_to 'Edit', edit_user_game_path(user_game) %></td>
         <td><%= link_to 'Destroy', user_game, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -32,8 +39,9 @@
 
 <br>
 
-<%= link_to t('.cancel', :default => t("helpers.links.Add_Games")),
-            games_path,
-            :class => 'btn btn-primary' %>
-<%= link_to t('.cancel', :default => t("helpers.links.home")),
-            user_games_path, :class => 'btn btn-default' %>
+<p>
+<%= link_to 'New User game', new_user_game_path %>
+</p>
+<p>
+<%= link_to "Main Menu", root_path %>
+</p>

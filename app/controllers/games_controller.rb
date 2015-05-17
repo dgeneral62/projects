@@ -1,16 +1,24 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
 
-
+  def auto_complete_search
+    begin
+      @games1 = Game.complete_for(params[:search])
+    rescue ScopedSearch::QueryNotSupported => e
+      @games1 = [{:error =>e.to_s}]
+    end
+    render :json =>@games2
+  end
 
   # GET /games
   # GET /games.json
   def index
-    if params[:query].present?
-      @games = Game.search(params[:query], page: params[:page])
-    else
-      @games = Game.all
-    end
+    @games = Game.all
+
+    @games2 = Game.search(params[:search], :order => params[:order]).all(:include => :release_date)
+  rescue => e
+    flash[:error] = e.to_s
+    #@games2= Game.search_for ''
   end
 
   # GET /games/1
@@ -25,9 +33,6 @@ class GamesController < ApplicationController
 
   # GET /games/1/edit
   def edit
-  end
-
-  def home
   end
 
   # POST /games

@@ -9,7 +9,13 @@ gem 'gmaps4rails'
 
 #gem "searchkick"
 
+gem 'scoped_search'
+
 gem 'omniauth-facebook'
+
+# gem 'bhm-google-maps'
+
+gem 'google_maps_api-distance_matrix'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
@@ -54,6 +60,6 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  gem 'spring', group: :development
 end
 

@@ -1,28 +1,17 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Friends</h1>
-
-
-<%= form_tag friends_path, class: "form-inline", :method => :get do %>
-    <div class="input-group input-group-lg">
-      <% if params[:query].present? %>
-          <div class="input-group-btn">
-            <%= link_to "Reset", friends_path, class: "btn btn-default" %>
-          </div>
-      <% else %>
-          <%= text_field_tag :query, params[:query], name: "Friend_Search", class: "form-control", autocomplete: "off" %>
-          <div class="input-group-btn">
-            <%= submit_tag "Search", class: "btn btn-primary" %>
-          </div>
-      <% end %>
-    </div>
-<% end %>
-
-<table>
+<div id="search" class="light">
+  <%= form_tag friends_path, :method => :get do %>
+      <%= auto_complete_field_tag_jquery(:search, params[:search], {:placeholder => "Enter Search Here"}) %>
+      <button id='submit_search' style="font-size: 12px;">Search</button>
+  <% end %>
+</div>
+<p><br /></p>
+<table class="table table-striped">
   <thead>
     <tr>
-      <br />
-      <th>Gamer ID</th>
+      <th>Gamer IDs</th>
       <th>Name</th>
       <th>Player Rank</th>
       <th>Platform</th>
@@ -47,9 +36,6 @@
 
 <br>
 
-<%= link_to t('.new', :default => t("helpers.links.find_new_friend")),
-            new_friend_path,
-            :class => 'btn btn-primary' %>
+<%= link_to 'New Friend', new_friend_path %> <p><br /></p>
 
-<%= link_to t('.cancel', :default => t("helpers.links.current_friends")),
-            user_friends_path, :class => 'btn btn-default' %>
+<%= link_to "Main Menu", root_path  %>

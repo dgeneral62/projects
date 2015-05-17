@@ -1,10 +1,24 @@
 class UserFriendsController < ApplicationController
   before_action :set_user_friend, only: [:show, :edit, :update, :destroy]
 
+  def auto_complete_search
+    begin
+      @user_friends1 = UserFriend.complete_for(params[:search])
+    rescue ScopedSearch::QueryNotSupported => e
+      @user_friends1 = [{:error =>e.to_s}]
+    end
+    render :json =>@user_friends2
+  end
+
   # GET /user_friends
   # GET /user_friends.json
   def index
     @user_friends = UserFriend.all
+
+    @user_friends2 = UserFriend.search(params[:search], :order => params[:order])
+    rescue => e
+    flash[:error] = e.to_s
+    #@user_friends2 = UserFriend.search_for ''
   end
 
   # GET /user_friends/1

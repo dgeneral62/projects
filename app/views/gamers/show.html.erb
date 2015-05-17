@@ -1,25 +1,21 @@
-<%- model_class = Gamer -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-</div>
+<h1><%= @company.name %></h1>
+<p></p>
+%p
+lat:
+=@company.lat
+<p></p>
+%p
+lng:
+=@company.lng
+/ map div
+<p></p>
+#map{:style => "width: 550px; height: 350px;"}
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:firstname) %>:</strong></dt>
-  <dd><%= @gamer.firstname %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:lastname) %>:</strong></dt>
-  <dd><%= @gamer.lastname %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:phonenumber) %>:</strong></dt>
-  <dd><%= @gamer.phonenumber %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:email) %>:</strong></dt>
-  <dd><%= @gamer.email %></dd>
-</dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              gamers_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_gamer_path(@gamer), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              gamer_path(@gamer),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+<p></p>
+
+:javascript
+$(document).ready(function(){
+var company = #{@company.to_json}    // pass ruby variable to javascript
+gmap_show(company);    // init show map for company card (only print marker)
+});

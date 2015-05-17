@@ -1,10 +1,24 @@
 class FriendsController < ApplicationController
   before_action :set_friend, only: [:show, :edit, :update, :destroy]
 
+  def auto_complete_search
+    begin
+    @friends1 = Friend.complete_for(params[:search])
+  rescue ScopedSearch::QueryNotSupported => e
+    @friends1 = [{:error =>e.to_s}]
+  end
+  render :json =>@friends2
+  end
+
   # GET /friends
   # GET /friends.json
   def index
     @friends = Friend.all
+    # User.search_for('my search string').each { |user| ... }
+    @friends2 = Friend.search(params[:search], :order => params[:order]).all(:include => :release_date)
+  rescue => e
+    flash[:error] = e.to_s
+    #@friends2= Friend.search_for ''
   end
 
   # GET /friends/1
@@ -19,9 +33,6 @@ class FriendsController < ApplicationController
 
   # GET /friends/1/edit
   def edit
-  end
-
-  def home
   end
 
   # POST /friends

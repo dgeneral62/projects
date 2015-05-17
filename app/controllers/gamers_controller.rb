@@ -10,6 +10,7 @@
   # GET /gamers/1
   # GET /gamers/1.json
   def show
+    @gamer = Gamer.find(params[:id])
   end
 
   # GET /gamers/new
@@ -72,6 +73,6 @@
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gamer_params
-      params.require(:gamer).permit(:firstname, :lastname, :phonenumber, :email)
+      params.require(:gamer).permit(:name, :lat, :lng) # :gamer_id
     end
 end

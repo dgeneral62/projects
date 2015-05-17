@@ -1,0 +1,10 @@
+
+<h1>Search PAGE !</h1>
+
+<% form_tag user_friends_path, :method => :get do %>
+    <!-- text_field_tag :search, params[:search], :value => 'Search' %> -->
+    <%= auto_complete_field_tag_jquery(:search, params[:search], {},{}) %>
+    <%= submit_tag "Go", :name => nil %>
+<%end%>
+
+<%= link_to "Back", :back %>

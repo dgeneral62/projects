@@ -1,5 +1,9 @@
 class Game < ActiveRecord::Base
-  searchkick
-  # Searchkick for dynamic searching features (searchkick callbacks: false)
+  has_and_belongs_to_many :users
+  has_and_belongs_to_many :user_games
 
- end
+  scoped_search on: :name, :complete_value => true
+  scoped_search on: :rating, :complete_value => true
+  scoped_search on: :publisher, :complete_value => true
+  scoped_search on: :platform, :complete_value => true
+end

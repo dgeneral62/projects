@@ -1,10 +1,24 @@
 class UserGamesController < ApplicationController
   before_action :set_user_game, only: [:show, :edit, :update, :destroy]
 
+  def auto_complete_search
+    begin
+      @user_games1 = UserGame.complete_for(params[:search])
+    rescue ScopedSearch::QueryNotSupported => e
+      @user_games1 = [{:error =>e.to_s}]
+    end
+    render :json =>@user_games2
+  end
+
   # GET /user_games
   # GET /user_games.json
   def index
     @user_games = UserGame.all
+
+    @user_games2 = UserGame.search(params[:search], :order => params[:order])
+     rescue => e
+    flash[:error] = e.to_s
+    #@user_games2 = UserGame.search ''
   end
 
   # GET /user_games/1

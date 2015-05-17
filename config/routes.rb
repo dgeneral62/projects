@@ -1,11 +1,27 @@
 Rails.application.routes.draw do
 
+  resources :user_friends
+
+  resources :user_games
+
+  resources :friends
+
+  resources :games
+
+  resources :update_location
+
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
   devise_for :users, path_names: {sign_out: "logout"}, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #devise_for :controllers #controllers: {sessions: 'sessions'}
   resources :gamers
   resources :users
+
+  #resource :users_games do
+   # get "user_games#search"
+ # end
+
+  # get "user_games/search"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -28,6 +44,21 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
 
+  resources :friends do
+    get :auto_complete_search, :on => :collection
+  end
+
+  resources :user_friends do
+    get :auto_complete_search, :on => :collection
+  end
+
+  resources :games do
+    get :auto_complete_search, :on => :collection
+  end
+
+  resources :user_games do
+    get :auto_complete_search, :on => :collection
+  end
   # Example resource route with options:
   #   resources :products do
   #     member do

@@ -119,7 +119,7 @@
         <div>
             <% if current_user %>
                 Post Your Status:<br/>
-                <textarea id="status" name="status" style="width:55%;" rows="10"><%= @status.status %></textarea>  <br>
+                <textarea id="status" name="status" style="width:55%;" rows="10"><%= @status == nil ? "" : @status.status %></textarea>  <br>
                 <input type="button" value="Update" onclick="postStatus();" /> <br>
                 <input type="checkbox" name="postToFacebook" id="postToFacebook" value="true" /> Post to Facebook<br>
             <% end %>

@@ -22,7 +22,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
   
   def user_params
-    params.require(:user).permit(:email, :password, :googleId, :bio)
+    params.require(:user).permit(:email, :password, :googleId)
   end
   
 end 

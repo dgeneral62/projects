@@ -13,6 +13,7 @@
 
     <p> <%= link_to 'Game List', user_games_path %> </p>
     <p> <%= link_to 'Friends', user_friends_path %> </p>
-    <p> <%= link_to 'Update Location', update_location_current_path %> </p>
+    <p> <%= link_to 'Update Location', new_update_location_path %> </p>
+    <%= render :partial => 'showstatus' %>
 
 <% end %> </p>

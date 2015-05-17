@@ -40,8 +40,7 @@ class FriendsController < ApplicationController
     @friend = current_user.friends.build(:gamer_id => params[:gamer_id])
     respond_to do |format|
       if @friend.save
-        format.html { redirect_to @friend, notice: 'Added Friend.' }
-        redirect_to user_friends_url
+        format.html { redirect_to user_friends_url, notice: 'You have Friended.' }
       else
         flash[:error] = "Unable to add friend."
         redirect_to user_friends_url

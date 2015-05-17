@@ -1,5 +1,7 @@
-<p id="notice"><%= notice %></p>
 <br/>
+<br/>
+<br/>
+<p id="notice"><%= notice %></p>
 <h1>My Friends List</h1>
 <table class = "table">
   <thead>
@@ -14,46 +16,25 @@
   <tbody>
   <% @friend = current_user.friends %>
   <% @friend.each do |user| %>
+    <% @user = User.find(user.gamer_id) %>
       <tr>
-        <td><%= user.gamer_id %></td>
-        <td><%= user.name %></td>
+        <% if @user.photo_file_name? %>
+            <td class="round-image-10"><%= image_tag(@user.photo.url(:thumb)) %></td>
+        <% else if @user.image? %>
+                <td class="round-image-10"><%= image_tag(@user.image+"?type=normal")%></td>
+            <%else%>
+                <td><p class="round-image-10"><%= image_tag("missing.png") %></p></td>
+            <% end %>
+        <% end %>
+        <%if @user.first_name %>
+        <td><%= @user.first_name %> <%= @user.last_name %></td>
+            <% else %>
+            <td><%= @user.name %></td>
+            <% end %>
         <td><%= button_to 'View Profile', users_url %></td>
         <td><%= button_to "Un-Friend", user, :method => :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
-  </tbody>
-</table>
-
-<table class = "table">
-  <thead>
-  <tr>
-    <th>Picture</th>
-    <th>Name</th>
-    <th>Profile</th>
-    <th>Standing</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @users = User.all %>
-  <% @users.each do |user| %>
-      <tr>
-        <% if user.photo_file_name? %>
-            <td class="round-image-10"><%= image_tag(user.photo.url(:thumb)) %></td>
-        <% else if user.image? %>
-            <td class="round-image-10"><%= image_tag(user.image+"?type=normal")%></td>
-                <%else%>
-               <td><p class="round-image-10"><%= image_tag("missing.png") %></p></td>
-            <% end %>
-        <% end %>
-        <% if user.name? %>
-        <td><%=h user.name %></td>
-            <% else %>
-            <td><%=h user.first_name %> <%=h user.last_name %></td></td>
-            <% end %>
-        <td><%= button_to 'View Profile', users_url %></td>
-        <td><%= button_to "Add Friend", friends_path(:gamer_id => user), :method => :post %></td>
-      </tr>
-  <% end %>
   </tbody>
 </table>
 <br>

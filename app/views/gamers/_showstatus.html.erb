@@ -1,0 +1,35 @@
+<% if user_signed_in? %>
+    <h1>Friends Statuses</h1>
+    <table class = "table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @friend = current_user.friends %>
+      <% @friend.each do |user| %>
+          <% @user = User.find(user.gamer_id) %>
+          <tr>
+            <% if @user.photo_file_name? %>
+                <td class="round-image-10"><%= image_tag(@user.photo.url(:thumb)) %></td>
+            <% else if @user.image? %>
+                    <td class="round-image-10"><%= image_tag(@user.image+"?type=normal")%></td>
+                <%else%>
+                    <td><p class="round-image-10"><%= image_tag("missing.png") %></p></td>
+                <% end %>
+            <% end %>
+            <%if @user.first_name %>
+                <td><%= @user.first_name %> <%= @user.last_name %></td>
+            <% else %>
+                <td><%= @user.name %></td>
+            <% end %>
+            <td><%= @user.bio %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<%end%>

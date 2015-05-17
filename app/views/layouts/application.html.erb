@@ -63,7 +63,7 @@
               <div id="navbar" class="navbar-collapse collapse">
               <% if user_signed_in? %>
               <ul class="nav navbar-nav theList", class = "liz">
-                <li> Search Bar Goes Here</li>
+                <li> </li>
                 <li><p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                   &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
                   &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
@@ -138,6 +138,33 @@
         <span class="sr-only">Next</span>
       </a>
     </div><!-- /.carousel -->
+
+      <!-- Wrap the rest of the page in another container to center all the content. -->
+
+      <div class="container marketing">
+
+        <!-- Three columns of text below the carousel -->
+        <div class="row">
+          <div class="col-lg-4">
+            <%= image_tag("ign.jpeg") %>
+            <h2>IGN Entertainment</h2>
+            <p>Their premium gaming & entertainment content attracts the largest concentration of 18-34 year old men online, which means that 1 in 4 US men online visit IGN each month. Worldwide, our reach is over 40 million unique visitors, including our sites in the U.K., Australia and Germany. Advertisers and agencies may find a lot more to like over at our media site.</p>
+            <p><a class="btn btn-default" href="http://www.ign.com/" role="button">Go To Website &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <%= image_tag("gamefax.jpeg") %>
+            <h2>GameFAQ</h2>
+            <p>GameFAQs is a website that hosts FAQs and walkthroughs for video games. It was created in November 1995 by Jeff Veasey and was bought by CNET Networks in May 2003. It is currently owned by CBS Interactive.</p>
+            <p><a class="btn btn-default" href="http://www.gamefaqs.com/" role="button">Go To Website &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+          <div class="col-lg-4">
+            <%= image_tag("gamespot.jpeg") %>
+            <h2>GameSpot</h2>
+            <p>GameSpot is the world's leading source for PS4, Xbox One, PS3, Xbox 360, Wii U, PS Vita, Wii, PC, 3DS, and DS video game.</p>
+            <p><a class="btn btn-default" href="http://www.gamespot.com/" role="button">Go To Website &raquo;</a></p>
+          </div><!-- /.col-lg-4 -->
+        </div><!-- /.row -->
+      </div>
   <% end%>
 
     <!-- Other Part
@@ -145,9 +172,6 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-9">
-          <%= bootstrap_flash %>
-
-          <p class="alert"><%= alert %></p>
 
           <%= yield %>
 

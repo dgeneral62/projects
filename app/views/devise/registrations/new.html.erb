@@ -1,30 +1,39 @@
+<% content_for :head do %>
   <script type="text/javascript">
-      function signinCallback(authResult) {
-        if (authResult['status']['signed_in']) {
-          gapi.client.load('plus', 'v1', apiClientLoaded);
-          document.getElementById('signinButton').setAttribute('style', 'display: none');
-          document.getElementById("google_alert").setAttribute('style', 'display: inline');
-        } else {
-          console.log('Sign-in state: ' + authResult['error']);
-        }
+    $(function() {
       }
-      
-      function apiClientLoaded() {
-        gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
-      }
+     );
 
-      function handleEmailResponse(resp) {
-          var googleId = resp.id;
-          var hasAccount = false;
-          $("#googleId").val(googleId);
-          
+    function signinCallback(authResult) {
+      if (authResult['status']['signed_in']) {
+        gapi.client.load('plus', 'v1', apiClientLoaded);
+        document.getElementById('signinButton').setAttribute('style', 'display: none');
+        document.getElementById("google_alert").setAttribute('style', 'display: inline');
+      } else {
+        console.log('Sign-in state: ' + authResult['error']);
       }
+    }
+    
+    function apiClientLoaded() {
+      gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
+    }
+
+    function handleEmailResponse(resp) {
+        var googleId = resp.id;
+        var hasAccount = false;
+        $("#googleId").val(googleId);
+        
+    }
   </script>
+<% end %>
+
+
   
   
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name) , :html => { :multipart => true }) do |f| %>
   <%= devise_error_messages! %>
 <div class = "container col-md-10 col-md-offset-10">
+  </br>
   <h2>Sign up</h2>
     <div class="field">
       <%= f.label :first_name %><br />
@@ -59,9 +68,10 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="field">
+    <%= f.file_field :photo %><br />
   </div>
+
 
   <div class="actions">
     <%= f.submit "Sign up" %>
@@ -81,5 +91,4 @@
   <input type="hidden" name="googleId" id="googleId" />
 <% end %>
 
-<%= render "devise/shared/links" %>
 </div>

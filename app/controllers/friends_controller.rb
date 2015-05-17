@@ -1,5 +1,4 @@
 class FriendsController < ApplicationController
-  before_action :set_friend, only: [:show, :edit, :update, :destroy]
 
   def auto_complete_search
     begin
@@ -38,15 +37,14 @@ class FriendsController < ApplicationController
   # POST /friends
   # POST /friends.json
   def create
-    @friend = Friend.new(friend_params)
-
+    @friend = current_user.friends.build(:gamer_id => params[:gamer_id])
     respond_to do |format|
       if @friend.save
-        format.html { redirect_to @friend, notice: 'Friend was successfully created.' }
-        format.json { render :show, status: :created, location: @friend }
+        format.html { redirect_to @friend, notice: 'Added Friend.' }
+        redirect_to user_friends_url
       else
-        format.html { render :new }
-        format.json { render json: @friend.errors, status: :unprocessable_entity }
+        flash[:error] = "Unable to add friend."
+        redirect_to user_friends_url
       end
     end
   end
@@ -68,21 +66,10 @@ class FriendsController < ApplicationController
   # DELETE /friends/1
   # DELETE /friends/1.json
   def destroy
+    @friend = current_user.friends.find(params[:id])
     @friend.destroy
     respond_to do |format|
-      format.html { redirect_to friends_url, notice: 'Friend was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to user_friends_url, notice: 'You have Un-Friended.' }
     end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_friend
-      @friend = Friend.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def friend_params
-      params.require(:friend).permit(:gamer_id, :name, :player_rank, :platform)
-    end
 end

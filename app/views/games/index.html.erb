@@ -1,14 +1,25 @@
+<br/>
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Games</h1>
-<div id="search" class="light">
-  <%= form_tag games_path, :method => :get do %>
-      <%= auto_complete_field_tag_jquery(:search, params[:search], {:placeholder => "Enter Search Here"}) %>
-      <button id='submit_search' style="font-size: 12px;">Search</button>
-  <% end %>
-</div>
-<p><br /></p>
-<table class="table table-striped">
+
+<%= form_tag games_path, class: "form-inline", :method => :get do %>
+    <div class="input-group input-group-lg">
+      <% if params[:query].present? %>
+          <div class="input-group-btn">
+            <%= link_to "Reset", games_path, class: "btn btn-default" %>
+          </div>
+      <% else %>
+          <%= text_field_tag :query, params[:query], name: "Game_Search", class: "form-control", autocomplete: "off" %>
+          <div class="input-group-btn">
+            <%= submit_tag "Search", class: "btn btn-primary" %>
+          </div>
+      <% end %>
+    </div>
+<% end %>
+
+
+<table>
   <thead>
     <tr>
       <th>Name</th>

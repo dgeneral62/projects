@@ -1,5 +1,130 @@
 <%- model_class = Gamer -%>
+<% content_for :head do %>
+  <script type="text/javascript">
+    // page load
+    $(function() {
+          window.fbAsyncInit = function() {
+            FB.init({
+              appId      : '888405311220725',
+              xfbml      : true,
+              version    : 'v2.3'
+            });
+            
+             FB.getLoginStatus(function(response) {
+              if (response.status === 'connected') {
+                console.log('Logged in.');
+              } else if (response.status === 'not_authorized') {
+                $("#postToFacebook").prop("disabled", true);
+                 FB.login(function(response) {
+                   // handle the response
+                 }, {scope: 'publish_actions'});
+              } else {
+                  $("#postToFacebook").prop("disabled", true);
+              }
+               
+             FB.Event.subscribe('auth.statusChange', auth_status_change_callback);
+            });           
+          };
+        
+          (function(d, s, id){
+             var js, fjs = d.getElementsByTagName(s)[0];
+             if (d.getElementById(id)) {return;}
+             js = d.createElement(s); js.id = id;
+             js.src = "//connect.facebook.net/en_US/sdk.js";
+             fjs.parentNode.insertBefore(js, fjs);
+           }(document, 'script', 'facebook-jssdk'));
+ 
+      }
+     );
+    
+    // facebook stuff
+    var auth_status_change_callback = function(response) {
+      $("#postToFacebook").prop("disabled", !(response.status === 'connected'));
+    }
+    
+    // google stuff
+        function onLoadCallback(){
+            var sessionParams = {};
+            sessionParams.client_id = '893730814987-2ljgnra992k43mpv5hugp049balt974c.apps.googleusercontent.com';
+            gapi.auth.checkSessionState(sessionParams, sessionStateCallback)
+        }
+        
+        function sessionStateCallback(loggedIn){
+        }
+    // post status
+     function postStatus(){
+         var val = $("#status").val();
+         var fb = $("#postToFacebook").prop("checked");
+         
+        $.ajax({
+          method: "POST",
+          url: "/gamers/updateStatus",
+          data: { status: val }
+        }).done(function( msg ) {
+            var canPost = false;
+            FB.api("/me/permissions", function (response) {
+                for (var i = 0; i < response.data.length; i++){
+                    var perm = response.data[i];
+                    if (perm.permission == "publish_actions" && perm.status == "granted"){
+                        canPost = true;
+                        break;
+                    }
+                }
+                if (fb)
+                    post(canPost, val)
+            });
+          });
+     }
+     
+     function post(canPost, status){
+        if (!canPost){
+             FB.login(function(response) {
+               canPost = response.status == "connected";
+               if (canPost == true){
+                   makeStatus(status)
+               }
+             }, {scope: 'publish_actions'});
+        } else {
+            makeStatus(status);
+        }  
+            
+     }
+     
+     function makeStatus(status){
+        FB.api(
+            "/me/feed",
+            "POST",
+            {
+                "message": status
+            },
+            function (response) {
+              if (response && !response.error) {
+              }
+            }
+        );          
+     }
+  </script>
+  
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer>
+    </script>
+<% end %>
+
 <div class="page-header">
-  <h1>G.O.D.<*> GAME<*>NATION - Home</h1>
 </div>
+<div>
 <%= render :partial => 'user_widget' %>
+</div>
+<div>
+    <form action="gamers/updateStatus" method="post">
+        <div>
+            <% if current_user %>
+                Post Your Status:<br/>
+                <textarea id="status" name="status" style="width:55%;" rows="10"><%= @status == nil ? " " : @status.status %></textarea>  <br>
+                <input type="button" value="Update" onclick="postStatus();" /> <br>
+                <input type="checkbox" name="postToFacebook" id="postToFacebook" value="true" /> Post to Facebook<br>
+            <% end %>
+            
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+        </div>
+    </form>
+</div>

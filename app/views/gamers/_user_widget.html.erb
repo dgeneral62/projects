@@ -1,10 +1,18 @@
 <% if user_signed_in? %>
-    <p>Welcome ~ <*> <%= current_user.email %> <*> ~</p>
+    <% if current_user.name? %>
+    <p><b>Welcome <%= current_user.name %></b></p>
+        <%= image_tag(current_user.image+"?type=normal")%>
+        <% else %>
+        <p><b>Welcome <%= current_user.first_name %></b></p>
+        <% if current_user.photo_file_name? %>
+        <p class="round-image-50"><%= image_tag(current_user.photo.url(:thumb)) %></p>
+            <%else%>
+            <p class="round-image-50"><%= image_tag("missing.png") %></p>
+            <% end %>
+        <% end %>
+
     <p> <%= link_to 'Game List', user_games_path %> </p>
     <p> <%= link_to 'Friends', user_friends_path %> </p>
-    <p> <%= link_to 'Settings', edit_user_registration_path %> </p>
-    <p> <%= link_to 'Update Location', new_update_location_path %> </p>
-    <p> <%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
-<% else %>
-    <%= link_to 'Login', new_user_session_path %>
+    <p> <%= link_to 'Update Location', update_location_current_path %> </p>
+
 <% end %> </p>

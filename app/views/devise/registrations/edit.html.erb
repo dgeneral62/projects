@@ -1,3 +1,4 @@
+</br>
 <h2>Manage Account for <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -13,6 +14,11 @@
   <% end %>
 
   <div class="field">
+    <label for="user[bio]">Bio</label> <i>(leave blank if you don't want to change it)</i><br />
+    <textarea rows="10" id="bio" name="user[bio]" style="width:70%;"> <%=@user.bio%></textarea>
+  </div>
+  
+  <div class="field">
     <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
@@ -26,6 +32,11 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
+
+    <div class="field">
+      <%= f.label :profile_picture %>
+      <%= f.file_field :photo %><br />
+    </div>
 
   <div class="actions">
     <%= f.submit "Update" %>

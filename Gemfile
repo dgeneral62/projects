@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'devise'
+
+gem 'elasticsearch'
 gem 'searchkick'
+
+gem 'amistad'
 
 gem 'tire'
 
@@ -16,6 +20,8 @@ gem 'omniauth-facebook'
 # gem 'bhm-google-maps'
 
 gem 'google_maps_api-distance_matrix'
+
+gem 'paperclip', '~> 4.1'
 
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS

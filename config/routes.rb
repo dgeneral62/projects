@@ -17,21 +17,14 @@ Rails.application.routes.draw do
   resources :gamers
   resources :users
 
-  #resource :users_games do
-   # get "user_games#search"
- # end
-
-  # get "user_games/search"
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
-  root 'gamers#home'
   get 'misc/createGoogle'
-  
+  post 'gamers/updateStatus'
   #root 'users/sign_in'
   # root 'gamers#new' , root 'gamers#show', root 'gamers#create'
 

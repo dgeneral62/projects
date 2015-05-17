@@ -18,11 +18,15 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update
+    Rails.logger.debug "============================================="
+    #@user.bio = params[:bio]
+    #@user.save!
     super
+    #user = User.where(email: params[:email]).first
   end
   
   def user_params
-    params.require(:user).permit(:email, :password, :googleId)
+    params.require(:user).permit(:email, :password, :googleId, :bio)
   end
   
 end 

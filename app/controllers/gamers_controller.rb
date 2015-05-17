@@ -37,6 +37,21 @@
     end
   end
 
+  def updateStatus
+    @status = UserStatus.new
+    @status.email = current_user.email
+    @status.status = params[:status]
+    @status.PostDate = DateTime.now
+    @status.save!
+    respond_to do |format|
+      if @status.save!
+        format.html { redirect_to '/', notice: 'Status was successfully updated.' }
+      else
+        format.html { render :new }
+      end
+    end
+  end
+  
   # PATCH/PUT /gamers/1
   # PATCH/PUT /gamers/1.json
   def update
@@ -61,6 +76,10 @@
     end
   end
 
+  def home
+    @status = UserStatus.where(email: current_user.email).order("PostDate DESC").first
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gamer
@@ -69,6 +88,6 @@
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gamer_params
-      params.require(:gamer).permit(:firstname, :lastname, :phonenumber, :email)
+      params.require(:gamer).permit(:firstname, :lastname, :phonenumber, :email, :status, :postToFacebook, :postToGoogle)
     end
 end

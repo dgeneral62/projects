@@ -13,7 +13,7 @@ Rails.application.routes.draw do
 
   root 'gamers#home'
   get 'misc/createGoogle'
-  
+  post 'gamers/updateStatus'
   #root 'users/sign_in'
 
   # root 'gamers#new' , root 'gamers#show', root 'gamers#create'

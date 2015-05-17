@@ -1,25 +1,33 @@
+<% content_for :head do %>
   <script type="text/javascript">
-      function signinCallback(authResult) {
-        if (authResult['status']['signed_in']) {
-          gapi.client.load('plus', 'v1', apiClientLoaded);
-          document.getElementById('signinButton').setAttribute('style', 'display: none');
-          document.getElementById("google_alert").setAttribute('style', 'display: inline');
-        } else {
-          console.log('Sign-in state: ' + authResult['error']);
-        }
+    $(function() {
       }
-      
-      function apiClientLoaded() {
-        gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
-      }
+     );
 
-      function handleEmailResponse(resp) {
-          var googleId = resp.id;
-          var hasAccount = false;
-          $("#googleId").val(googleId);
-          
+    function signinCallback(authResult) {
+      if (authResult['status']['signed_in']) {
+        gapi.client.load('plus', 'v1', apiClientLoaded);
+        document.getElementById('signinButton').setAttribute('style', 'display: none');
+        document.getElementById("google_alert").setAttribute('style', 'display: inline');
+      } else {
+        console.log('Sign-in state: ' + authResult['error']);
       }
+    }
+    
+    function apiClientLoaded() {
+      gapi.client.plus.people.get({userId: 'me'}).execute(handleEmailResponse);
+    }
+
+    function handleEmailResponse(resp) {
+        var googleId = resp.id;
+        var hasAccount = false;
+        $("#googleId").val(googleId);
+        
+    }
   </script>
+<% end %>
+
+
   
   
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>

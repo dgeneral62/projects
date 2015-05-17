@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406125839) do
+ActiveRecord::Schema.define(version: 20150517030706) do
 
   create_table "gamers", force: :cascade do |t|
     t.string   "firstname"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20150406125839) do
     t.string   "email"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "user_statuses", force: :cascade do |t|
+    t.string   "email"
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "PostDate"
   end
 
   create_table "users", force: :cascade do |t|
@@ -42,6 +50,7 @@ ActiveRecord::Schema.define(version: 20150406125839) do
     t.boolean  "Confirmation"
     t.string   "google"
     t.string   "string"
+    t.string   "bio"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -1,7 +1,11 @@
 source 'https://rubygems.org'
 
 gem 'devise'
+
+gem 'elasticsearch'
 gem 'searchkick'
+
+gem 'amistad'
 
 gem 'tire'
 

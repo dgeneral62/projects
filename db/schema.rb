@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517030706) do
+ActiveRecord::Schema.define(version: 20150517150408) do
 
   create_table "friends", force: :cascade do |t|
     t.string   "gamer_id"
@@ -20,17 +20,10 @@ ActiveRecord::Schema.define(version: 20150517030706) do
     t.string   "platform"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.text     "user_id"
   end
 
-  create_table "gamers", force: :cascade do |t|
-    t.string   "firstname"
-    t.string   "lastname"
-    t.string   "phonenumber"
-    t.string   "email"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
+# Could not dump table "gamers" because of following NoMethodError
+#   undefined method `[]' for nil:NilClass
 
   create_table "games", force: :cascade do |t|
     t.string   "name"
@@ -41,16 +34,6 @@ ActiveRecord::Schema.define(version: 20150517030706) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
-
-  create_table "microposts", force: :cascade do |t|
-    t.text     "content"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "microposts", ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
-  add_index "microposts", ["user_id"], name: "index_microposts_on_user_id"
 
   create_table "user_friends", force: :cascade do |t|
     t.string   "gamer_id"
@@ -98,14 +81,6 @@ ActiveRecord::Schema.define(version: 20150517030706) do
     t.boolean  "Confirmation"
     t.string   "google"
     t.string   "string"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "name"
-    t.string   "image"
-    t.string   "photo_file_name"
-    t.string   "photo_content_type"
-    t.integer  "photo_file_size"
-    t.datetime "photo_updated_at"
     t.string   "bio"
   end
 
